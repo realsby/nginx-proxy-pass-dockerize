@@ -11,7 +11,7 @@ sample: **docker-compose.yml**
     version: '3.1'
     services:
         nginx:
-            image: savemu/nginx-proxy-pass-dockerize
+            image: instal/nginx-proxy-pass-dockerize
             environment:
                 SERVER_UPSTREAM: 127.0.0.1:8000
                 SERVERNAME: "example.com sub.example.com "
