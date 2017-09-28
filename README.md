@@ -8,14 +8,14 @@ Set env variable during run to change the behaviour
 
 sample: **docker-compose.yml**
 
-    version: 3.1
+    version: 2.1
     services:
         nginx:
             image: instal/nginx-proxy-pass-dockerize
             environment:
-                SERVER_UPSTREAM: 127.0.0.1:8000
-                SERVERNAME: "example.com sub.example.com "
-                HOSTNAME: "example.com"
+                SERVER_UPSTREAM: example-service:8000
+                NGINX_EXTRA_SERVER_NAMES: "www.example.com ww.example.com"
+                NGINX_HOSTNAME: "example.com"
 
 
 ## Available Environment Variables
