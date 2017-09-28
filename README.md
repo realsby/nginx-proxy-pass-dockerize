@@ -8,7 +8,7 @@ Set env variable during run to change the behaviour
 
 sample: **docker-compose.yml**
 
-    version: '3.1'
+    version: 3.1
     services:
         nginx:
             image: instal/nginx-proxy-pass-dockerize
@@ -17,6 +17,58 @@ sample: **docker-compose.yml**
                 SERVERNAME: "example.com sub.example.com "
                 HOSTNAME: "example.com"
 
+
+## Available Environment Variables
+
+This is the list of the current processed environment variables with their defaults:
+
+- `NGINX_ERROR_LOGLEVEL`
+    - default: `info`
+    - This is the level for the error log in the standard output
+    
+- `NGINX_WORKER_PROCESSES`
+    - default: `4`
+    - Number of worker processes
+- `NGINX_WORKER_CONNECTIONS`
+    - default: `4096`
+    - Number of connections every worker can handle
+
+- `NGINX_MULTI_ACCEPT`
+    - default: `on`
+- `NGINX_UPSTREAM_SERVER`
+    - default: `127.0.0.1:8000`
+    - The host:port of the upstream server that host your application. When nginx is used inside the same pod of the application server the host can be `127.0.0.1`. When used as a separated service you must provide the dns name of the application server service
+- `NGINX_UPSTREAM_KEEPALIVE`
+    - default: 32
+    - Number of connections to the upstream server, we must keep open. To disable keepalive on set it to `0`
+- `NGINX_SERVER_PORT`
+    - default: `8080`
+    - The port nginx listen for connections
+- `NGINX_HOSTNAME`
+    - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined. When this variable is defined nginx will configured to reply to request with the same `host` header . For example `instal.com` 
+- `NGINX_EXTRA_SERVER_NAMES`
+    - default: ``
+    - These are the extra "virtualhosts" for the server. For example `showcase.instal.com instal.com localhost`
+- `NGINX_CLIENT_MAX_BODY_SIZE`
+    - default: `70M`
+    - Max size of post payload allowed, this is used to limit upload size on the server
+- `NGINX_CLIENT_BODY_TIMEOUT`
+    - default: `60s`
+    - this is used to limit timeour when uploading files on the server
+- `NGINX_FASTCGI_READ_TIMEOUT`
+    - default: `60s`
+- `NGINX_PROXY_READ_TIMEOUT`
+    - default: `60s`
+    - Timeout on reading requests from the upstream server
+- `NGINX_GZIP_TYPES`
+    - default: `application/xml application/json`
+    - Content types that needs gzip compression
+- `NGINX_HOST_REWRITE_ENABLED`
+    - default: `False`
+    - When this flag is defined, it enables the rewrite of the url with the specified hosts to the one defined in `NGINX_HOSTNAME`
+- `NGINX_HOST_REWRITE_SERVER_NAMES`
+    - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined
+    - Host names that needs to be rewrited
 
 ------------------------------------------------------------------------------------------------------------------------
 

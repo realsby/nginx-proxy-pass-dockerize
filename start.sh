@@ -1,7 +1,6 @@
 #!/bin/sh
-/bin/sed -i "s/<UPSTREAM-SERVER-PLACEHOLDER>/${SERVER_UPSTREAM}/" /app/nginx.conf
-/bin/sed -i "s/<SERVERNAME-PLACEHOLDER>/${SERVERNAME}/" /app/nginx.conf
-/bin/sed -i "s/<HOSTNAME-PLACEHOLDER>/${HOSTNAME}/" /app/nginx.conf
 
+python environment_template.py /app/nginx.template.conf /app/nginx.conf || exit 1
+echo "Starting nginx with the following configuration:"
 cat /app/nginx.conf
 nginx -c /app/nginx.conf

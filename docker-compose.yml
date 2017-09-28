@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    build: ./
+    image: instal/nginx-proxy-pass-dockerize:${version:-latest}
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    environment:
+      - NGINX_UPSTREAM_SERVER=nginx-upstream:3000
+
+  # this is a simple http echo server listening on 3000
+  nginx-upstream:
+    container_name: nginx-upstream
+    image: kennship/http-echo
+
+networks:
+  default:
+    driver: bridge
