@@ -63,6 +63,12 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_GZIP_TYPES`
     - default: `application/xml application/json`
     - Content types that needs gzip compression
+- `NGINX_KEEPALIVE_TIMEOUT`
+    - default: `3600s`
+    - Number of seconds keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. 
+- `NGINX_KEEPALIVE_REQUESTS`
+    - default: `10000`
+    - Sets the maximum number of requests that can be served through one keep-alive connection. After the maximum number of requests are made, the connection is closed.
 - `NGINX_HOST_REWRITE_ENABLED`
     - default: `False`
     - When this flag is defined, it enables the rewrite of the url with the specified hosts to the one defined in `NGINX_HOSTNAME`
