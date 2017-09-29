@@ -9,6 +9,7 @@ build:
 push: build
 	docker push $(IMAGE_NAME)
 	docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME):$(VERSION)
 
 exec:
 	docker-compose exec nginx-proxy ash
@@ -21,4 +22,5 @@ test:
 	make build
 	make upd
 	http docker:8080/test
+	http docker:8080/__healthcheck
 	docker-compose exec nginx-proxy wrk --latency -t12 -c200 -d5s http://127.0.0.1:8080
