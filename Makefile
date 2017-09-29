@@ -1,4 +1,4 @@
-VERSION:=$(shell git rev-parse HEAD | cut -c-7)
+VERSION:=1.2
 IMAGE_NAME:=instal/nginx-proxy-pass-dockerize
 
 .PHONY: build
