@@ -1,21 +1,63 @@
-Basic configuration for a proxy pass using nginx,
-would like to be a configurable container for all our services
+Basic configuration for a proxy pass using nginx.
+The default configuration will listen on port 8080 without any virtual hosts and proxy requests to loopback interface on port 8000
 
 Usage
 -----
 
 Set env variable during run to change the behaviour
 
-sample: **docker-compose.yml**
+sample: **deployment.yml**
 
-    version: 2.1
-    services:
-        nginx:
-            image: instal/nginx-proxy-pass-dockerize
-            environment:
-                SERVER_UPSTREAM: example-service:8000
-                NGINX_EXTRA_SERVER_NAMES: "www.example.com ww.example.com"
-                NGINX_HOSTNAME: "example.com"
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: instal-showcase-deployment
+      namespace: instal-dashboard
+    spec:
+      replicas: 3
+      revisionHistoryLimit: 3
+      template:
+        metadata:
+          labels:
+            app: instal-showcase
+        spec:
+          containers:
+            - name: instal-showcase
+              image:  gcr.io/feisty-gasket-100715/instal-showcase:latest
+              ports:
+                - name: gunicorn
+                  containerPort: 8810
+              readinessProbe:
+                httpGet:
+                  path: /_probe
+                  port: gunicorn
+            - name: instal-showcase-nginx
+              image: instal/nginx-proxy-pass-dockerize:1.2
+              ports:
+                - name: nginx
+                  containerPort: 8080
+              resources:
+                requests:
+                  memory: "8Mi"
+                  cpu: "10m"
+              readinessProbe:
+                httpGet:
+                  path: /_probe
+                  port: nginx
+              env:
+                - name: NGINX_UPSTREAM_SERVER
+                  value: '127.0.0.1:8810'
+                - name: NGINX_HOSTNAME
+                  value: instal.com
+                - name: NGINX_EXTRA_SERVER_NAMES
+                  value: 'showcase.instal.com'
+                - name: NGINX_UPSTREAM_KEEPALIVE
+                  value: '0'
+                - name: NGINX_HOST_REWRITE_ENABLED
+                  value: '1'
+                - name : NGINX_HOST_REWRITE_SERVER_NAMES
+                  value: www.instal.com
+
 
 
 ## Available Environment Variables
