@@ -20,6 +20,6 @@ test:
 	docker-compose down --rmi local
 	make build
 	make upd
-	http docker:8080/test
-	http docker:8080/__healthcheck
+	curl localhost:8080/test
+	curl localhost:8080/__healthcheck
 	docker-compose exec nginx-proxy wrk --latency -t12 -c200 -d5s http://127.0.0.1:8080
