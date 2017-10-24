@@ -67,7 +67,7 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_ERROR_LOGLEVEL`
     - default: `info`
     - This is the level for the error log in the standard output
-    
+
 - `NGINX_WORKER_PROCESSES`
     - default: `4`
     - Number of worker processes
@@ -87,7 +87,7 @@ This is the list of the current processed environment variables with their defau
     - default: `8080`
     - The port nginx listen for connections
 - `NGINX_HOSTNAME`
-    - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined. When this variable is defined nginx will configured to reply to request with the same `host` header . For example `instal.com` 
+    - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined. When this variable is defined nginx will configured to reply to request with the same `host` header . For example `instal.com`
 - `NGINX_EXTRA_SERVER_NAMES`
     - default: ``
     - These are the extra "virtualhosts" for the server. For example `showcase.instal.com instal.com localhost`
@@ -107,7 +107,7 @@ This is the list of the current processed environment variables with their defau
     - Content types that needs gzip compression
 - `NGINX_KEEPALIVE_TIMEOUT`
     - default: `3600s`
-    - Number of seconds keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections. 
+    - Number of seconds keep-alive client connection will stay open on the server side. The zero value disables keep-alive client connections.
 - `NGINX_KEEPALIVE_REQUESTS`
     - default: `10000`
     - Sets the maximum number of requests that can be served through one keep-alive connection. After the maximum number of requests are made, the connection is closed.
@@ -117,6 +117,9 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_HOST_REWRITE_SERVER_NAMES`
     - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined
     - Host names that needs to be rewrited
+- `NGINX_ACCESS_LOG_TO_STDOUT`
+    - default: `true`
+    - Enable nginx to stream the access log on the stdout of the container
 
 ------------------------------------------------------------------------------------------------------------------------
 
