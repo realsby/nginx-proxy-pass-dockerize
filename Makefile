@@ -1,4 +1,4 @@
-VERSION:=1.7
+VERSION:=1.8
 IMAGE_NAME:=instal/nginx-proxy-pass-dockerize
 
 .PHONY: build
@@ -8,6 +8,10 @@ build:
 .PHONY: push
 push: build
 	docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME):$(VERSION)
+
+.PHONY: push_version
+push_version:
 	docker push $(IMAGE_NAME):$(VERSION)
 
 exec:
