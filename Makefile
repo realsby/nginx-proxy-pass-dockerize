@@ -1,4 +1,4 @@
-VERSION:=2.4
+VERSION:=2.6
 IMAGE_NAME:=instal/nginx-proxy-pass-dockerize
 
 .PHONY: build
