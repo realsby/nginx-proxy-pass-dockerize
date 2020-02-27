@@ -89,7 +89,7 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_HOSTNAME`
     - Mandatory when `NGINX_HOST_REWRITE_ENABLED` is defined. When this variable is defined nginx will configured to reply to request with the same `host` header . For example `instal.com`
 - `NGINX_EXTRA_SERVER_NAMES`
-    - default: ``
+    - default:
     - These are the extra "virtualhosts" for the server. For example `showcase.instal.com instal.com localhost`
 - `NGINX_CLIENT_MAX_BODY_SIZE`
     - default: `70M`
@@ -120,6 +120,10 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_ACCESS_LOG_TO_STDOUT`
     - default: `true`
     - Enable nginx to stream the access log on the stdout of the container
+- `NGINX_REMOVE_XFORWARDEDFOR`
+    - default: `false`
+    - values: `true|false`
+    - Cleanup the X-Forwarded for to avoid having incorrect values
 
 ------------------------------------------------------------------------------------------------------------------------
 
