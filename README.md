@@ -1,4 +1,4 @@
-forked: https://bitbucket.org/tbdsrl/nginx-proxy-pass-dockerized/
+Forked from: https://bitbucket.org/tbdsrl/nginx-proxy-pass-dockerized/
 
 Only difference is you can configure location and trailing slash option, to able to have a proxy running like this http://myproxy.com/custom-location/foo/bar/ to http://application.com/foo/bar/ (According to nginx docs: If the proxy_pass directive is specified with a URI, then when a request is passed to the server, the part of a normalized request URI matching the location is replaced by a URI specified in the directive.)
 
