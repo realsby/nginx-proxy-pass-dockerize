@@ -32,6 +32,7 @@ sample: **docker-compose.yml**
           - NGINX_HEALTHCHECK_PATH=/is-ready/
           - NGINX_PROXY_LOCATION=/custom-location/
           - NGINX_PROXY_TRAILING_SLASH=true
+          - NGINX_PROXY_WEBSOCKET=true
         networks:
           - same
       your-container:
@@ -169,4 +170,7 @@ This is the list of the current processed environment variables with their defau
     - default: `false`
     - values: `true|false`
     - Add trailing slash at the end of proxy pass to configure mapping is assumed and paths are passed as-is or not.
-------------------------------------------------------------------------------------------------------------------------
+- `NGINX_PROXY_WEBSOCKET`
+    - default: `false`
+    - values: `true|false`
+    - Configure related upgrade headers for websocket proxy.
