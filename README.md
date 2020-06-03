@@ -1,3 +1,8 @@
+forked: https://bitbucket.org/tbdsrl/nginx-proxy-pass-dockerized/
+
+Docker: https://hub.docker.com/r/realsby/nginx-proxy-pass-dockerize
+Git: https://github.com/realsby/nginx-proxy-pass-dockerize/
+
 Basic configuration for a proxy pass using nginx.
 The default configuration will listen on port 8080 without any virtual hosts and proxy requests to loopback interface on port 8000
 
@@ -32,7 +37,7 @@ sample: **deployment.yml**
                   path: /_probe
                   port: gunicorn
             - name: instal-showcase-nginx
-              image: instal/nginx-proxy-pass-dockerize:1.2
+              image: realsby/nginx-proxy-pass-dockerize:1.2
               ports:
                 - name: nginx
                   containerPort: 8080
@@ -67,14 +72,12 @@ This is the list of the current processed environment variables with their defau
 - `NGINX_ERROR_LOGLEVEL`
     - default: `info`
     - This is the level for the error log in the standard output
-
 - `NGINX_WORKER_PROCESSES`
     - default: `4`
     - Number of worker processes
 - `NGINX_WORKER_CONNECTIONS`
     - default: `4096`
     - Number of connections every worker can handle
-
 - `NGINX_MULTI_ACCEPT`
     - default: `on`
 - `NGINX_UPSTREAM_SERVER`
@@ -124,7 +127,4 @@ This is the list of the current processed environment variables with their defau
     - default: `false`
     - values: `true|false`
     - Cleanup the X-Forwarded for to avoid having incorrect values
-
 ------------------------------------------------------------------------------------------------------------------------
-
-*inspired by: https://github.com/mikesplain/nginx-proxy-pass-docker/*

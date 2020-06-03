@@ -5,7 +5,7 @@ services:
   nginx-proxy:
     container_name: nginx-proxy
     build: ./
-    image: instal/nginx-proxy-pass-dockerize:${version:-latest}
+    image: realsby/nginx-proxy-pass-dockerize:${version:-latest}
     stdin_open: true
     tty: true
     ports:

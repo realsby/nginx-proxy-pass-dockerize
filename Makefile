@@ -1,9 +1,9 @@
 VERSION:=2.11
-IMAGE_NAME:=instal/nginx-proxy-pass-dockerize
+IMAGE_NAME:=realsby/nginx-proxy-pass-dockerize
 
 .PHONY: build
 build:
-	docker build . -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):latest
+	docker build . -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):latest --no-cache
 
 .PHONY: push
 push: build
