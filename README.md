@@ -1,6 +1,10 @@
 Forked from: https://bitbucket.org/tbdsrl/nginx-proxy-pass-dockerized/
 
-Only difference is you can configure location and trailing slash option, to able to have a proxy running like this http://myproxy.com/custom-location/foo/bar/ to http://application.com/foo/bar/ (According to nginx docs: If the proxy_pass directive is specified with a URI, then when a request is passed to the server, the part of a normalized request URI matching the location is replaced by a URI specified in the directive.)
+# Differences
+
+- You can configure location and trailing slash option, to able to have a proxy running like this http://myproxy.com/custom-location/foo/bar/ to http://application.com/foo/bar/ (According to nginx docs: If the proxy_pass directive is specified with a URI, then when a request is passed to the server, the part of a normalized request URI matching the location is replaced by a URI specified in the directive.)
+
+- New headers for websocket proxy.
 
 Docker: https://hub.docker.com/r/realsby/nginx-proxy-pass-dockerize
 Git: https://github.com/realsby/nginx-proxy-pass-dockerize/
@@ -8,7 +12,7 @@ Git: https://github.com/realsby/nginx-proxy-pass-dockerize/
 Basic configuration for a proxy pass using nginx.
 The default configuration will listen on port 8080 without any virtual hosts and proxy requests to loopback interface on port 8000
 
-Usage
+# Usage
 -----
 
 Set env variable during run to change the behaviour
