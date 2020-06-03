@@ -1,4 +1,4 @@
-VERSION:=2.11
+VERSION:=2.12
 IMAGE_NAME:=realsby/nginx-proxy-pass-dockerize
 
 .PHONY: build
