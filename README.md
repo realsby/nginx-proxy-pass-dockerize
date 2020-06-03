@@ -1,5 +1,7 @@
 forked: https://bitbucket.org/tbdsrl/nginx-proxy-pass-dockerized/
 
+Only difference is you can configure location and trailing slash option, to able to have a proxy running like this http://myproxy.com/custom-location/foo/bar/ to http://application.com/foo/bar/ (According to nginx docs: If the proxy_pass directive is specified with a URI, then when a request is passed to the server, the part of a normalized request URI matching the location is replaced by a URI specified in the directive.)
+
 Docker: https://hub.docker.com/r/realsby/nginx-proxy-pass-dockerize
 Git: https://github.com/realsby/nginx-proxy-pass-dockerize/
 
@@ -10,6 +12,36 @@ Usage
 -----
 
 Set env variable during run to change the behaviour
+
+
+sample: **docker-compose.yml**
+
+    version: '3'
+    services:
+      your-proxy:
+        container_name: your-proxy
+        image: realsby/nginx-proxy-pass-dockerize
+        restart: always
+        ports:
+          - 8080:8080
+        environment:
+          - NGINX_SERVER_PORT=8080
+          - NGINX_WORKER_PROCESSES=1
+          - NGINX_UPSTREAM_SERVER=your-container:3002
+          - NGINX_UPSTREAM_KEEPALIVE=64
+          - NGINX_HEALTHCHECK_PATH=/is-ready/
+          - NGINX_PROXY_LOCATION=/custom-location/
+          - NGINX_PROXY_TRAILING_SLASH=true
+        networks:
+          - same
+      your-container:
+        container_name: your-container
+        image: your-container:latest
+        ports:
+          - 3002:3002
+        networks:
+          - same
+
 
 sample: **deployment.yml**
 
@@ -127,4 +159,14 @@ This is the list of the current processed environment variables with their defau
     - default: `false`
     - values: `true|false`
     - Cleanup the X-Forwarded for to avoid having incorrect values
+- `NGINX_HEALTHCHECK_PATH`
+    - default: `/__healthcheck`
+    - Location path to test is your proxy nginx ready and working, it should return 200
+- `NGINX_PROXY_LOCATION`
+    - default: `~ /`
+    - Location path to proxy pass your upstream
+- `NGINX_PROXY_TRAILING_SLASH`
+    - default: `false`
+    - values: `true|false`
+    - Add trailing slash at the end of proxy pass to configure mapping is assumed and paths are passed as-is or not.
 ------------------------------------------------------------------------------------------------------------------------
